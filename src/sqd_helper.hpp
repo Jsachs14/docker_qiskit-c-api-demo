@@ -64,13 +64,12 @@ std::pair<std::vector<uint64_t>, std::vector<uint64_t>> bitstring_matrix_to_ci_s
     for (size_t config = 0; config < num_configs; ++config) {
         const auto &row = bitstring_matrix[config];
 
-        for (size_t i = 0; i < norb; ++i)
-            if (row[i])
-                ci_str_left[config] += static_cast<uint64_t>(std::pow(2, i));
-
-        for (size_t i = 0; i < norb; ++i)
-            if (row[i + norb])
-                ci_str_right[config] += static_cast<uint64_t>(std::pow(2, i));
+        for (size_t i = 0; i < norb; ++i) {
+            ci_str_right[config] ^= static_cast<std::uint64_t>(row[i]) << i;
+        }
+        for (size_t i = 0; i < norb; ++i) {
+            ci_str_left[config] ^= static_cast<std::uint64_t>(row[i + norb]) << i;
+        }
     }
 
     std::set<uint64_t> unique_ci_str_left(ci_str_left.begin(), ci_str_left.end());
