@@ -1,3 +1,14 @@
+# (SACHS) DOCKER INSTRUCTIONS 
+
+1. Click on the link for the github (my fork of the original demo repository) and open up your own Codebase through Code/Codespaces
+2. A UI similar to VS Code should open up. In your terminal, you should be in
+
+```sh
+/workspaces/docker_qiskit-c-api-demo
+```
+
+A script will then commence installing all neccessary dependencies. You will have to insert your own Qiskit Token/keys.
+
 # Demonstration of SQD using the Qiskit C API
 
 This code demonstrates an **end-to-end compiled hybrid quantum/classical computation** that uses [Sample-based Quantum Diagonalization (SQD)](https://www.science.org/doi/10.1126/sciadv.adu9991) to approximate the ground state energy of the Fe₄S₄ cluster. Unlike earlier demonstrations, this code compiles to a single executable which can be run across many nodes of a supercomputer while also leveraging quantum resources.  The workflow performs the following steps:
@@ -14,7 +25,8 @@ Step 3 is mediated by the [Quantum Resource Management Interface](https://github
 Step 4 is enabled by a new [HPC-ready SQD addon](https://github.com/Qiskit/qiskit-addon-sqd-hpc) for Qiskit, together with the [SBD eigensolver](https://github.com/r-ccs-cms/sbd) developed by RIKEN.
 
 ## Features
-
+- Docker Image for easier use, specifically in Github Codespaces
+- Using the Docker/setup will install all deps automatically, up to the step involving your IBM token and key (in the README.md)
 - HPC-ready implementation using modern C++17, MPI, and OpenMP.
 - Integration with Qiskit C++, QRMI, and qiskit-addon-sqd-hpc.
 - Support for hybrid quantum-classical workflows, including:
@@ -27,6 +39,10 @@ Step 4 is enabled by a new [HPC-ready SQD addon](https://github.com/Qiskit/qiski
 ## Project Structure
 
 ```
+├──.devcontainer #files for the github codespaces auto-docker setup.
+│   ├── Dockerfile 
+│   ├── devcontainer.json
+│   └── setup.sh
 ├── data
 │   ├── fcidump_Fe4S4_MO.txt         # Input file containing molecular orbital integrals
 │   ├── initial_occupancies_fe4s4.json # JSON file defining initial orbital occupancies
@@ -120,7 +136,7 @@ cmake .. -DCMAKE_CXX_FLAGS="-DUSE_RANDOM_SHOTS=1"
 make
 ```
 
-### 4. Using IBM Quantum Hardware
+### 4. Using IBM Quantum Hardware (START HERE AFTER DOCKER IS BUILT)
 To run simulations on IBM Quantum hardware via QRMI, set the following environment variables:
 
 ```sh

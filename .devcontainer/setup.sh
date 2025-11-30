@@ -22,7 +22,4 @@ cd build
 cmake .. -DCMAKE_CXX_FLAGS="-DUSE_RANDOM_SHOTS=1"
 make -j"$(nproc)"
 
-echo "=== [setup] Running ctest (non-fatal) ==="
-ctest || echo '[setup] ctest failed (or tests not configured); continuing.'
-
 echo "=== [setup] Done. Binaries are in build/ ==="
