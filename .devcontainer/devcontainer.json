@@ -5,10 +5,7 @@
     "context": ".."
   },
 
-  // Use root so the Rust install from Dockerfile works without extra plumbing
   "remoteUser": "root",
-
-  // Where the repo will live inside the container
   "workspaceFolder": "/workspaces/docker_qiskit-c-api-demo",
 
   "customizations": {
@@ -23,6 +20,5 @@
     }
   },
 
-  // After the container is built, init submodules automatically
-  "postCreateCommand": "cd /workspaces/docker_qiskit-c-api-demo && git submodule update --init --recursive"
+  "postCreateCommand": "bash .devcontainer/setup.sh"
 }
